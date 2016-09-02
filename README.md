@@ -11,4 +11,4 @@
 
 创建文件
 当前目录下输入：echo "PictureManipulation" >> README.md
-参考http://www.cnblogs.com/lovesong/p/5004951.html
+>参考http://www.cnblogs.com/lovesong/p/5004951.html
