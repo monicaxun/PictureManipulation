@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+.viewing_image {
+  position: relative;
+  border: #dddddd 1px solid;
+  padding: 3px;
+  width: 749px;
+  height: 505px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  left: 50%;
+  margin-left: -375px;
+}
+
+.image_container{
+  width: 749px;
+  height: 505px;
+}
+
+.image_container img{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  z-index: 999;
+  cursor: move;
+}
+
+.tool_panel {
+  position: absolute;
+  left: 23px;
+  bottom: 23px;
+  background: rgba(153, 153, 153, 0.5);
+  height: 30px;
+  padding: 0 20px;
+  z-index: 2010;
+  border-radius: 3px;
+}
+
+.tool_panel span{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url(img/toolbg.png) no-repeat;
+  cursor: pointer;
+}
+
+.tool_panel span.turn_right{
+  background-position: 0 -36px;
+}
+
+.tool_panel span.fit_container{
+  background-position: 0 -73px;
+}

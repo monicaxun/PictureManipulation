@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>图片旋转拖动示例</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="image_manipulation.css">
+</head>
+<body>
+  <div>
+    <div class="viewing_image">
+      <div class="image_container">
+        <img src="img/img1.jpg">
+      </div>
+      <div class="tool_panel">
+        <span class="turn_left"></span>
+        <span class="turn_right"></span>
+        <span class="fit_container"></span>
+      </div>
+    </div>
+  </div>
+
+<script src="jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+  var count = 0;
+
+  // 图片旋转（左旋，右旋）
+  $(".tool_panel").on("click", ".turn_left, .turn_right", function(e){
+    e.preventDefault();
+    if($(this).hasClass("turn_left")){
+      count++;
+    } else{
+      count--;
+    }
+
+    var degree = ["rotate(", 90*count, "deg)"].join("");
+    $(".image_container").css("transform", degree);
+  })
+
+  var param = {
+    isDrag: false,
+    priMouseX: 0,
+    priMouseY: 0,
+    left: 3,
+    top: 3
+  };
+
+  // 图片拖拽
+  $(".image_container img").on("mousedown", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    // 获取初始化数值
+    param.isDrag = true;
+    param.priMouseX = e.pageX || e.clientX;
+    param.priMouseY = e.pageY || e.clientY;
+    param.left = $(this).offset().left;
+    param.top = $(this).offset().top;
+  }).on("mousemove", function(e){
+
+    e.preventDefault(); // 添加阻止事件，否则点击图片松开依然可拖拽
+    e.stopPropagation();
+    if(param.isDrag){
+      // 拖动鼠标移动图片
+      var nowX = e.pageX || e.clientX;
+      var nowY = e.pageY || e.clientY;
+      var nextLeft = param.left + (nowX - param.priMouseX);
+      var nextTop = param.top + (nowY - param.priMouseY);
+
+      $(this).offset({
+        left: nextLeft,
+        top: nextTop
+      });
+    }
+  }).on("mouseup", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    // 初始化
+    param.isDrag = false;
+  }).on("mouseleave", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    // 鼠标离开，设置图片不可拖拽
+    param.isDrag = false;
+  });
+})
+</script>
+</body>
+</html>
